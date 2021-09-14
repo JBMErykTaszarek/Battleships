@@ -9,5 +9,6 @@ namespace Battleships.Services.Interfaces
     public interface IGameService
     {
         public List<Board> GetGame();
+        public Field PlayRound(Player player);
     }
 }

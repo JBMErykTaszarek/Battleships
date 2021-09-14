@@ -17,12 +17,27 @@ namespace Battleships.Services
 
             BoardSetters.PlaceShips(player1);
             BoardSetters.PlaceShips(player2);
-
+            //algortyhm gry 
+            //return historiagry
             var retList = new List<Board>();
             retList.Add(player1.GameBoard);
             retList.Add(player2.GameBoard);
 
             return retList;
+        }
+
+        public Field PlayRound(Player player)
+        {
+            var hitedFields = player.FiringBoard.Fields.Where(x => x.FieldStatus == Enums.FieldStatus.Hit).ToList();
+            if (hitedFields.Count > 0)
+            {
+                Shooting.AccurateShoot(hitedFields.FirstOrDefault());
+            }
+            else
+            {
+                Shooting.RandomShot(player.FiringBoard);
+            }
+
         }
     }
 }
